@@ -81,6 +81,18 @@
     }
   },
   "templates": {
+    "train_icon": {
+      "path": "templates/train/icon.png",
+      "threshold": 0.75
+    },
+    "train_outer_seat": {
+      "path": "templates/train/seat.png",
+      "threshold": 0.75
+    },
+    "train_join": {
+      "path": "templates/train/take_seat.png",
+      "threshold": 0.75
+    },
     "collect_icon": {
       "path": "templates/ui/collect_truck.png",
       "threshold": 0.75

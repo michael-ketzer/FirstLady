@@ -35,6 +35,14 @@
     "collect_resources": {
       "handler": "src.automation.routines.collectResources.CollectResourcesRoutine",
       "interval": null
+    },
+    "survivors": {
+      "handler": "src.automation.routines.checkSurvivors.CheckNewSurvivorsRoutine",
+      "interval": 300
+    },
+    "trainOnboarding": {
+      "handler": "src.automation.routines.checkTrainJoin.CheckTrainJoinRoutine",
+      "interval": 3600
     }
   },
   "scheduled_events": {

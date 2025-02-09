@@ -5,8 +5,6 @@ from typing import List, Optional
 from .logging import app_logger
 import re
 import time
-import socket
-import telnetlib
 import os
 import traceback
 
