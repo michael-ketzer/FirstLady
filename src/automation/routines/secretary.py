@@ -14,7 +14,7 @@ from src.core.text_detection import (
     CONTROL_LIST
 )
 from src.core.audio import play_beep
-import numpy as np
+from src.game.controls import navigate_home
 
 class SecretaryRoutine(TimeCheckRoutine):
     force_home: bool = True
@@ -43,7 +43,9 @@ class SecretaryRoutine(TimeCheckRoutine):
         ):  
             return False
         handle_swipes(self.device_id, direction="down", num_swipes=1)
-        return self.process_all_secretary_positions()
+        res = self.process_all_secretary_positions()
+        navigate_home(self.device_id, True)
+        return res
 
     def find_accept_buttons(self) -> list[Tuple[int, int]]:
         """Find all accept buttons on the screen and sort by Y coordinate"""
@@ -105,7 +107,7 @@ class SecretaryRoutine(TimeCheckRoutine):
             
             if notification:
                 humanized_tap(device_id, notification[0], notification[1])
-                press_back(device_id)
+                #press_back(device_id)
                 human_delay(CONFIG['timings']['menu_animation'])
 
             return True
@@ -202,6 +204,13 @@ class SecretaryRoutine(TimeCheckRoutine):
                         languages='eng', 
                         img=screenshot
                     )
+                    name_text, original_name_text = extract_text_from_region(
+                        self.device_id, 
+                        name_region, 
+                        languages='eng', 
+                        img=screenshot
+                    )
+                    app_logger.info(f"Alliance: {alliance_text} ({original_text}), Name: {name_text} ({original_name_text})")
                     
                     if len(CONTROL_LIST['whitelist']['alliance']) > 0:
                         if alliance_text in CONTROL_LIST['whitelist']['alliance']:
@@ -309,7 +318,7 @@ class SecretaryRoutine(TimeCheckRoutine):
                     x_diff = app_x - pos_x
                     y_diff = app_y - pos_y
                     # Check if applicant icon is within 100 pixels horizontally and 25 pixels vertically
-                    if abs(x_diff) <= 100 and abs(y_diff) <= 28:
+                    if abs(x_diff) <= 140 and abs(y_diff) <= 50:
                         positions_to_process.append(position_type)
                         app_logger.info(f"Found applicant for {position_type} position")
                         break

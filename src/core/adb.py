@@ -20,8 +20,7 @@ def get_device_list() -> List[str]:
                 cmd,
                 capture_output=True,
                 text=True,
-                check=True,
-                shell=True  # Required for Windows compatibility
+                check=True
             )
         except FileNotFoundError:
             app_logger.error("ADB not found in PATH. Checking common Android SDK locations...")
@@ -80,7 +79,7 @@ def press_back(device_id: str) -> bool:
     """Press back button"""
     try:
         cmd = f"adb -s {device_id} shell input keyevent 4"
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
         return result.returncode == 0
         
     except Exception as e:
@@ -91,7 +90,7 @@ def tap_screen(device_id: str, x: int, y: int) -> bool:
     """Tap screen at coordinates"""
     try:
         cmd = f"adb -s {device_id} shell input tap {x} {y}"
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
         return result.returncode == 0
         
     except Exception as e:
@@ -102,7 +101,7 @@ def swipe_screen(device_id: str, start_x: int, start_y: int, end_x: int, end_y: 
     """Swipe screen from start to end coordinates"""
     try:
         cmd = f"adb -s {device_id} shell input swipe {start_x} {start_y} {end_x} {end_y} {duration}"
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
         return result.returncode == 0
         
     except Exception as e:
@@ -125,7 +124,7 @@ def get_current_running_app(device_id):
     """
     try:
         result = subprocess.run(
-            ['adb', '-s', device_id, 'shell', 'dumpsys', 'window', 'windows'],
+            ['adb', '-s', device_id, 'shell', 'dumpsys', 'window', 'displays'],
             capture_output=True,
             text=True,
             check=True

@@ -1,7 +1,7 @@
 {
   "package_name": "com.fun.lastwar.gp",
   "sleep_multiplier": 1.0,
-  "debug_mode": false,
+  "debug_mode": true,
   "max_retries": 3,
   "max_home_attempts": 500,
   "retry_delay": 1.0,
@@ -11,8 +11,8 @@
   "match_threshold": 0.8,
   "ui_elements": {
     "profile": {
-      "x": "5%",
-      "y": "3%"
+      "x": "4%",
+      "y": "8%"
     },
     "secretary_menu": {
       "x": "70%",
@@ -67,48 +67,50 @@
   "ocr_settings": {
     "languages": {
       "alliance": "eng+osd",
-      "name": [
-        "eng",
-        "chi_sim",
-        "kor",
-        "jpn",
-        "rus",
-        "ara",
-        "tha"
-      ]
+      "name": []
     },
     "psm_mode": 8,
     "oem_mode": 3
   },
   "control_list": {
     "whitelist": {
-      "alliance": [
-        "Brn",
-        "sTAR",
-        "twr",
-        "UbRg",
-        "Trol",
-        "trol",
-        "wxp",
-        "NzC",
-        "krw",
-        "FZL",
-        "rhw",
-        "s8UP",
-        "ssUP"
-      ]
+      "alliance": []
     },
     "blacklist": {
       "alliance": []
     }
   },
   "templates": {
+    "collect_icon": {
+      "path": "templates/ui/collect_truck.png",
+      "threshold": 0.75
+    },
+    "collect_accept": {
+      "path": "templates/ui/collect.png",
+      "threshold": 0.75
+    },
+    "survivor_icon": {
+      "path": "templates/survivor/icon.png",
+      "threshold": 0.75
+    },
+    "survivor_accept": {
+      "path": "templates/survivor/accept.png",
+      "threshold": 0.75
+    },
     "left_bracket": {
       "path": "templates/ui/left_bracket.png",
       "threshold": 0.75
     },
     "right_bracket": {
       "path": "templates/ui/right_bracket.png",
+      "threshold": 0.75
+    },
+    "left_bracket_blue": {
+      "path": "templates/ui/left_bracket_blue.png",
+      "threshold": 0.75
+    },
+    "right_bracket_blue": {
+      "path": "templates/ui/right_bracket_blue.png",
       "threshold": 0.75
     },
     "accept": {
@@ -229,7 +231,7 @@
     },
     "has_applicant": {
       "path": "templates/secretary/hasApplicant.png",
-      "threshold": 0.50
+      "threshold": 0.5
     },
     "alliance_gifts": {
       "path": "templates/alliance/gifts.png",
@@ -242,6 +244,10 @@
     "alliance_gift_premium": {
       "path": "templates/alliance/premium.png",
       "threshold": 0.65
+    },
+    "x": {
+      "path": "templates/ui/x.png",
+      "threshold": 0.75
     }
   },
   "discord": {

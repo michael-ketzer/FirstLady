@@ -337,6 +337,7 @@ class MainAutomation:
                 app_logger.info("Game launched successfully")
                 if navigate_home(self.device_id, force=True):
                     self.game_state["is_home"] = True
+                    retry_count = 0
                     return True
                 
             retry_count += 1

@@ -13,14 +13,14 @@ def take_screenshot(device_id: str) -> bool:
         
         # Take screenshot on device
         cmd = f"adb -s {device_id} shell screencap -p /sdcard/screen.png"
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
         if result.returncode != 0:
             app_logger.error(f"Failed to take screenshot: {result.stderr}")
             return False
             
         # Pull screenshot to local tmp directory
         cmd = f"adb -s {device_id} pull /sdcard/screen.png tmp/screen.png"
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
         if result.returncode != 0:
             app_logger.error(f"Failed to pull screenshot: {result.stderr}")
             return False
@@ -37,7 +37,7 @@ def get_screen_size(device_id: str) -> Tuple[int, int]:
     """Get screen size from device"""
     try:
         cmd = f"adb -s {device_id} shell wm size"
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
         if result.returncode != 0:
             app_logger.error(f"Failed to get screen size: {result.stderr}")
             return (1920, 1080)  # Default fallback
@@ -54,7 +54,7 @@ def cleanup_device_screenshots(device_id: str) -> None:
     """Clean up screenshots from device"""
     try:
         cmd = f"adb -s {device_id} shell rm -f /sdcard/screen*.png"
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
         if result.returncode == 0:
             app_logger.debug("Cleaned up device screenshots")
         else:
@@ -80,7 +80,6 @@ def cleanup_temp_files() -> None:
                     app_logger.warning(f"Failed to delete {item}: {e}")
             
             try:
-                tmp_dir.rmdir()
                 app_logger.debug("Cleaned up main temporary directory")
             except Exception as e:
                 app_logger.warning(f"Failed to delete tmp directory: {e}")

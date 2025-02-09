@@ -107,7 +107,13 @@ def launch_game(device_id: str):
             humanized_tap(device_id, start_loc[0], start_loc[1])
             human_delay(CONFIG['timings']['menu_animation'])
         
-        # Check for home icon
+        # Check for home icon or X icon
+        x_loc = find_template(device_id, "x")
+        if x_loc:
+            app_logger.debug("Found X icon")
+            navigate_home(device_id, True)
+            return True
+
         home_loc = find_template(device_id, "home")
         if home_loc:
             app_logger.debug("Found home icon")
@@ -135,6 +141,7 @@ def navigate_home(device_id: str, force: bool = False) -> bool:
         max_attempts = CONFIG.get('max_home_attempts', 10)
         for attempt in range(max_attempts):
             # Not found, press back and wait
+            find_and_tap_template(device_id, "x")
             press_back(device_id)
             human_delay(CONFIG['timings']['menu_animation'])
             

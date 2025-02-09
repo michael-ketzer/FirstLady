@@ -61,7 +61,7 @@ def find_template(
             app_logger.debug("Failed to load screenshot")
             return None
             
-        app_logger.debug(f"Screenshot loaded successfully. Shape: {img.shape}")
+        # app_logger.debug(f"Screenshot loaded successfully. Shape: {img.shape}")
         
         # Match template
         result = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)
@@ -69,8 +69,8 @@ def find_template(
         
         # Get threshold from template config or use default
         threshold = template_config.get('threshold', CONFIG['match_threshold'])
-        app_logger.debug(f"Match values - Max: {max_val:.4f}, Min: {min_val:.4f}, Threshold: {threshold}")
-        app_logger.debug(f"Match location - Max: {max_loc}, Min: {min_loc}")
+        # app_logger.debug(f"Match values - Max: {max_val:.4f}, Min: {min_val:.4f}, Threshold: {threshold}")
+        # app_logger.debug(f"Match location - Max: {max_loc}, Min: {min_loc}")
         
         # Fix the threshold comparison
         if max_val < threshold:  # Remove the incorrect "threshold - -0.16"

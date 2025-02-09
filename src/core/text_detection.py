@@ -79,11 +79,18 @@ def get_text_regions(
         device_id,
         "left_bracket",
         search_region=(x1, y1, x2, y2)
+    ) + find_all_templates(
+        device_id,
+        "left_bracket_blue",
+        search_region=(x1, y1, x2, y2)
     )
-    
     right_brackets = find_all_templates(
         device_id,
         "right_bracket",
+        search_region=(x1, y1, x2, y2)
+    ) + find_all_templates(
+        device_id,
+        "right_bracket_blue",
         search_region=(x1, y1, x2, y2)
     )
     
