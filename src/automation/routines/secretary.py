@@ -204,13 +204,7 @@ class SecretaryRoutine(TimeCheckRoutine):
                         languages='eng', 
                         img=screenshot
                     )
-                    name_text, original_name_text = extract_text_from_region(
-                        self.device_id, 
-                        name_region, 
-                        languages='eng', 
-                        img=screenshot
-                    )
-                    app_logger.info(f"Alliance: {alliance_text} ({original_text}), Name: {name_text} ({original_name_text})")
+                    app_logger.info(f"Alliance: {alliance_text} ({original_text})")
                     
                     if len(CONTROL_LIST['whitelist']['alliance']) > 0:
                         if alliance_text in CONTROL_LIST['whitelist']['alliance']:

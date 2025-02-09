@@ -119,25 +119,26 @@ def get_text_regions(
         
         # Calculate vertical bounds based on bracket position
         y_center = left_bracket[1]
-        y_padding = int(height * 0.02)
+        y_padding = int(height * 0.015)
         
         # Now use bracket_width in region calculations
         alliance_region = (
-            left_bracket[0] + bracket_width - 15,
+            left_bracket[0] + bracket_width - 5,
             max(0, y_center - y_padding),
-            right_bracket[0] + 15,
+            right_bracket[0] - 8,
             min(height, y_center + y_padding)
         )
         app_logger.debug(f"Calculated alliance region: {alliance_region}")
         
         name_region = (
-            right_bracket[0] + bracket_width,
+            right_bracket[0] + bracket_width + 8,
             max(0, y_center - y_padding),
-            x2,
+            x2 - 25,
             min(height, y_center + y_padding)
         )
         
         save_debug_region(device_id, alliance_region, "alliance")
+        save_debug_region(device_id, name_region, "name")
         return alliance_region, name_region, img
     
     # Fallback case with wider ratio
@@ -199,10 +200,8 @@ def extract_text_from_region(device_id: str, region: Tuple[int, int, int, int], 
         config = (
             '--psm 7 '  # Single line mode
             '--oem 1 '  # LSTM only
-            f'-c tessedit_char_whitelist={ALLIANCE_CHARS}[] '
-            '-c tessedit_write_images=1 '
-            '-c textord_min_linesize=2 '
-            '-c edges_max_children_per_outline=40'
+            f'-c tessedit_char_whitelist={ALLIANCE_CHARS}'
+
         )
         text = pytesseract.image_to_string(binary, lang=languages, config=config).strip()
         original_text = text
@@ -279,7 +278,7 @@ def build_alliance_whitelist() -> str:
     return whitelist
 
 # Build alliance whitelist from config
-ALLIANCE_CHARS = build_alliance_whitelist()
+ALLIANCE_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 # Export CONFIG's control list for compatibility
 CONTROL_LIST = CONFIG.get('control_list', {
