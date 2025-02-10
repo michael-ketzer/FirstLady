@@ -51,6 +51,10 @@
     "collectValentineGifts": {
       "handler": "src.automation.routines.checkValentineGift.CheckValentineGiftRoutine",
       "interval": 1000
+    },
+    "autoInbox": {
+      "handler": "src.automation.routines.autoInbox.AutoInboxRoutine",
+      "interval": 300
     }
   },
   "scheduled_events": {

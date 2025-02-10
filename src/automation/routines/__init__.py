@@ -8,4 +8,5 @@ from .collectTruck import CollectTruckRoutine
 from .checkSurvivors import CheckNewSurvivorsRoutine
 from .checkTrainJoin import CheckTrainJoinRoutine
 from .checkValentineGift import CheckValentineGiftRoutine
+from .autoInbox import AutoInboxRoutine
 #from .weeklyReset import WeeklyResetRoutine 

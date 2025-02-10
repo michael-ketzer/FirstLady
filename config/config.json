@@ -9,6 +9,7 @@
   "donate_alliance_interval": null,
   "screenshot_quality": 100,
   "match_threshold": 0.8,
+  "auto_inbox": "If you have any questions, please write King Julien directly, this chat is ignored. If you send a present, thank you! :)",
   "ui_elements": {
     "profile": {
       "x": "4%",
@@ -275,6 +276,26 @@
     },
     "valentine_open": {
       "path": "templates/valentine/gifts_open.png",
+      "threshold": 0.75
+    },
+    "message_notifier": {
+      "path": "templates/message/message-mask.png",
+      "threshold": 0.35
+    },
+    "message_indicator": {
+      "path": "templates/message/indicator.png",
+      "threshold": 0.75
+    },
+    "message_chat_box": {
+      "path": "templates/message/chat_box.png",
+      "threshold": 0.75
+    },
+    "message_send": {
+      "path": "templates/message/send.png",
+      "threshold": 0.75
+    },
+    "message_back": {
+      "path": "templates/message/back.png",
       "threshold": 0.75
     }
   },

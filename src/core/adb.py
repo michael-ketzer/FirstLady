@@ -84,6 +84,20 @@ def press_back(device_id: str) -> bool:
         app_logger.error(f"Error pressing back: {e}")
         return False
 
+def input_message(device_id: str, message: str) -> bool:
+    """Input message into chat box"""
+    app_logger.info(f"Inputting message: {message}")
+    app_logger.info(f"adb -s {device_id} shell input text '{message.replace(' ', '%s')}'")
+
+    try:
+        cmd = f"adb -s {device_id} shell input text '{message.replace(' ', '%s')}'"
+        result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
+        return result.returncode == 0
+        
+    except Exception as e:
+        app_logger.error(f"Error inputting message: {e}")
+        return False
+    
 def tap_screen(device_id: str, x: int, y: int) -> bool:
     """Tap screen at coordinates"""
     try:
