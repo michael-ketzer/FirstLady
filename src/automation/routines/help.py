@@ -1,5 +1,6 @@
 from src.automation.routines.routineBase import TimeCheckRoutine
-from src.core.image_processing import find_and_tap_template
+from src.core.image_processing import find_and_tap_template, find_template
+from src.core.adb import press_back
 
 class HelpRoutine(TimeCheckRoutine):
     def _execute(self) -> bool:
@@ -13,6 +14,8 @@ class HelpRoutine(TimeCheckRoutine):
             error_msg="No help needed at this time",
             success_msg="Helping allies!"
         ):
-            return True
+            if not find_template(self.device_id, "home"):
+                press_back(self.device_id)
+                return True
             
         return True 
