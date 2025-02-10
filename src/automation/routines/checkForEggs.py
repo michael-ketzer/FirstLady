@@ -7,30 +7,30 @@ from discord import Embed
 import asyncio
 import os
 
-class CheckForDigsRoutine(TimeCheckRoutine):
+class CheckForEggsRoutine(TimeCheckRoutine):
     
     def __init__(self, device_id: str, interval: int, last_run: float = None, automation=None):
         super().__init__(device_id, interval, last_run, automation)
         self.discord = DiscordNotifier()
         self.is_enabled = bool(os.getenv('DISCORD_WEBHOOK_URL'))
         if not self.is_enabled:
-            app_logger.warning("Dig notification routine disabled: DISCORD_WEBHOOK_URL not found in environment variables")
+            app_logger.warning("Egg notification routine disabled: DISCORD_WEBHOOK_URL not found in environment variables")
         
     def _execute(self) -> bool:
-        """Execute dig notification check sequence"""
+        """Execute egg notification check sequence"""
         if not self.is_enabled:
             return True
         return self.execute_with_error_handling(self._execute_internal)
         
     def _execute_internal(self) -> bool:
-        """Check for dig icon and handle if found"""
+        """Check for egg icon and handle if found"""
         try:
             # Open chat by clicking the dig icon
             if not find_and_tap_template(
                 self.device_id,
-                "dig",
-                error_msg="Could not find dig icon",
-                success_msg="Found dig icon"
+                "egg",
+                error_msg="Could not find egg icon",
+                success_msg="Found egg icon"
             ):
                 return True
             
@@ -41,7 +41,7 @@ class CheckForDigsRoutine(TimeCheckRoutine):
             return True
             
         except Exception as e:
-            app_logger.error(f"Error in dig check routine: {e}")
+            app_logger.error(f"Error in egg check routine: {e}")
             return False
             
     async def send_notification(self) -> bool:
@@ -49,15 +49,15 @@ class CheckForDigsRoutine(TimeCheckRoutine):
         if not self.is_enabled:
             return True
             
-        dig_config = CONFIG['discord']['dig_notification']
-        embed = Embed(color=int(dig_config['embed_color'], 16))
+        egg_config = CONFIG['discord']['egg_notification']
+        embed = Embed(color=int(egg_config['embed_color'], 16))
         embed.add_field(
-            name=dig_config['embed_title'],
-            value=dig_config['embed_value']
+            name=egg_config['embed_title'],
+            value=egg_config['embed_value']
         )
         
         return await self.discord.send_notification(
-            dig_config['content'],
+            egg_config['content'],
             embed,
             username=CONFIG['discord'].get('bot_name', 'Last War Bot')
         )

@@ -38,7 +38,7 @@
     }
   },
   "timings": {
-    "tap_delay": 1,
+    "tap_delay": 0.5,
     "menu_animation": 1,
     "list_animation": 1,
     "swipe_duration": {
@@ -221,6 +221,10 @@
       "path": "templates/ui/dig.png",
       "threshold": 0.75
     },
+    "egg": {
+      "path": "templates/ui/egg.png",
+      "threshold": 0.75
+    },
     "hidden_treasures": {
       "path": "templates/hidden_treasures/hidden_treasures_tab.png",
       "threshold": 0.75
@@ -263,11 +267,17 @@
     }
   },
   "discord": {
-    "bot_name": "Tina\ubd07",
+    "bot_name": "Last War Bot",
     "dig_notification": {
-      "content": "<:digEmote:1305924160949846106> **NEW DIG / \uc0c8\ub85c\uc6b4 \ubc1c\uad74**",
-      "embed_title": ":zap: Action Required / \uc870\uce58 \ud544\uc694",
-      "embed_value": ":flag_us: A new dig has been posted! Get digging!\n:flag_kr: \uc0c8\ub85c\uc6b4 \ubc1c\uad74\uc774 \uac8c\uc2dc\ub418\uc5c8\uc2b5\ub2c8\ub2e4! \ubc1c\uad74\uc744 \uc2dc\uc791\ud558\uc138\uc694!",
+      "content": "<:digEmote:1305924160949846106> **NEW DIG**",
+      "embed_title": ":zap: Action Required",
+      "embed_value": "A new dig has been posted! Get digging!",
+      "embed_color": "0xFF0000"
+    },
+    "egg_notification": {
+      "content": ":egg: **NEW EGG**",
+      "embed_title": ":zap: Action Required",
+      "embed_value": "A new egg has been posted! Get in there quick!",
       "embed_color": "0xFF0000"
     }
   }

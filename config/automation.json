@@ -14,7 +14,11 @@
     },
     "dig": {
       "handler": "src.automation.routines.checkForDigs.CheckForDigsRoutine",
-      "interval": null
+      "interval": 5
+    },
+    "egg": {
+      "handler": "src.automation.routines.checkForEggs.CheckForEggsRoutine",
+      "interval": 5
     },
     "collectTruck": {
       "handler": "src.automation.routines.collectTruck.CollectTruckRoutine",
