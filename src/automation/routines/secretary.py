@@ -15,6 +15,7 @@ from src.core.text_detection import (
 )
 from src.core.audio import play_beep
 from src.game.controls import navigate_home
+import time
 
 class SecretaryRoutine(TimeCheckRoutine):
     force_home: bool = True
@@ -99,16 +100,11 @@ class SecretaryRoutine(TimeCheckRoutine):
             humanized_tap(device_id, profile_x, profile_y)
 
             # Look for notification indicators
-            notification = wait_for_image(
-                device_id,
-                "awesome",
-                timeout=CONFIG['timings']['menu_animation'],
-            )
-            
-            if notification:
-                humanized_tap(device_id, notification[0], notification[1])
-                #press_back(device_id)
-                human_delay(CONFIG['timings']['menu_animation'])
+
+            time.sleep(2)
+
+            if find_and_tap_template(device_id, "awesome", "No likes", "Found likes and clicked it"):
+                human_delay(CONFIG['timings']['menu_animation'])                
 
             return True
         except Exception as e:

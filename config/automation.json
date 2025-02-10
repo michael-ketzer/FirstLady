@@ -46,7 +46,7 @@
     },
     "trainOnboarding": {
       "handler": "src.automation.routines.checkTrainJoin.CheckTrainJoinRoutine",
-      "interval": 3600
+      "interval": null
     }
   },
   "scheduled_events": {
