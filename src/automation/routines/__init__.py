@@ -7,4 +7,5 @@ from .checkForDigs import CheckForDigsRoutine
 from .collectTruck import CollectTruckRoutine
 from .checkSurvivors import CheckNewSurvivorsRoutine
 from .checkTrainJoin import CheckTrainJoinRoutine
+from .checkValentineGift import CheckValentineGiftRoutine
 #from .weeklyReset import WeeklyResetRoutine 

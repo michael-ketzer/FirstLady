@@ -47,6 +47,10 @@
     "trainOnboarding": {
       "handler": "src.automation.routines.checkTrainJoin.CheckTrainJoinRoutine",
       "interval": null
+    },
+    "collectValentineGifts": {
+      "handler": "src.automation.routines.checkValentineGift.CheckValentineGiftRoutine",
+      "interval": 1000
     }
   },
   "scheduled_events": {

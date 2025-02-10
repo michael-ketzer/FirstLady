@@ -264,6 +264,18 @@
     "x": {
       "path": "templates/ui/x.png",
       "threshold": 0.75
+    },
+    "valentine_icon": {
+      "path": "templates/valentine/gift.png",
+      "threshold": 0.75
+    },
+    "valentine_new": {
+      "path": "templates/valentine/new_gifts.png",
+      "threshold": 0.75
+    },
+    "valentine_open": {
+      "path": "templates/valentine/gifts_open.png",
+      "threshold": 0.75
     }
   },
   "discord": {
