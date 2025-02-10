@@ -54,7 +54,7 @@
     },
     "autoInbox": {
       "handler": "src.automation.routines.autoInbox.AutoInboxRoutine",
-      "interval": 300
+      "interval": null
     }
   },
   "scheduled_events": {
