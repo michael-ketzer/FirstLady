@@ -62,7 +62,7 @@
     },
     "secretTask": {
       "handler": "src.automation.routines.secretTask.SecretTaskRoutine",
-      "interval": 300
+      "interval": 60
     }
   },
   "scheduled_events": {

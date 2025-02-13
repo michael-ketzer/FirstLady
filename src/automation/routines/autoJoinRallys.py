@@ -45,8 +45,8 @@ class AutoJoinRallysRoutine(TimeCheckRoutine):
                     )
                     return True
                 else:
-                  press_back(self.device_id)
+                    press_back(self.device_id)
             else:
-              press_back(self.device_id)
+                press_back(self.device_id)
 
         return True 

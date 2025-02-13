@@ -330,13 +330,17 @@
       "path": "templates/secret/go.png",
       "threshold": 0.75
     },
+    "secret_claim": {
+      "path": "templates/secret/claim.png",
+      "threshold": 0.75
+    },
     "secret_deploy": {
       "path": "templates/secret/deploy.png",
       "threshold": 0.75
     },
     "secret_no_deploy": {
-      "path": "templates/secret/qd.png",
-      "threshold": 0.75
+      "path": "templates/secret/no_deploy.png",
+      "threshold": 0.85
     },
     "secret_qd": {
       "path": "templates/secret/qd.png",
