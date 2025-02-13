@@ -3,7 +3,7 @@ from src.core.logging import app_logger
 from src.core.config import CONFIG
 from src.core.image_processing import find_and_tap_template
 from src.core.discord_bot import DiscordNotifier
-from src.core.controls import press_back
+from src.core.adb import press_back
 from discord import Embed
 import asyncio
 import os
