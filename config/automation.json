@@ -55,6 +55,10 @@
     "autoInbox": {
       "handler": "src.automation.routines.autoInbox.AutoInboxRoutine",
       "interval": null
+    },
+    "autoJoinRallys": {
+      "handler": "src.automation.routines.autoJoinRallys.AutoJoinRallysRoutine",
+      "interval": 10
     }
   },
   "scheduled_events": {

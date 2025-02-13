@@ -22,7 +22,7 @@ class RoutineBase(ABC):
         """Start the automation sequence with home navigation"""
         try:
             if not self.automation.game_state["is_home"]:
-                if not navigate_home(self.device_id, True):
+                if not navigate_home(self.device_id):
                     app_logger.error("Failed to navigate home after clearing dig")
                     return False
             self.automation.game_state["is_home"] = True

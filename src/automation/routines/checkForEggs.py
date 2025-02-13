@@ -46,6 +46,7 @@ class CheckForEggsRoutine(TimeCheckRoutine):
             
     async def send_notification(self) -> bool:
         """Send bilingual notification"""
+        return True
         if not self.is_enabled:
             return True
             

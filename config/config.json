@@ -82,6 +82,18 @@
     }
   },
   "templates": {
+    "rally_icon": {
+      "path": "templates/rally/open.png",
+      "threshold": 0.75
+    },
+    "rally_available": {
+      "path": "templates/rally/available.png",
+      "threshold": 0.75
+    },
+    "rally_join": {
+      "path": "templates/rally/join.png",
+      "threshold": 0.75
+    },
     "train_icon": {
       "path": "templates/train/icon.png",
       "threshold": 0.75
