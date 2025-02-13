@@ -10,4 +10,5 @@ from .checkTrainJoin import CheckTrainJoinRoutine
 from .checkValentineGift import CheckValentineGiftRoutine
 from .autoInbox import AutoInboxRoutine
 from .autoJoinRallys import AutoJoinRallysRoutine
+from .secretTask import SecretTaskRoutine
 #from .weeklyReset import WeeklyResetRoutine 

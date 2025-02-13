@@ -82,6 +82,14 @@
     }
   },
   "templates": {
+    "base": {
+      "path": "templates/ui/base.png",
+      "threshold": 0.75
+    },
+    "map": {
+      "path": "templates/ui/map.png",
+      "threshold": 0.75
+    },
     "rally_icon": {
       "path": "templates/rally/open.png",
       "threshold": 0.75
@@ -92,6 +100,10 @@
     },
     "rally_join": {
       "path": "templates/rally/join.png",
+      "threshold": 0.75
+    },
+    "rally_back_home": {
+      "path": "templates/rally/back_home_location.png",
       "threshold": 0.75
     },
     "train_icon": {
@@ -308,6 +320,50 @@
     },
     "message_back": {
       "path": "templates/message/back.png",
+      "threshold": 0.75
+    },
+    "secret_icon": {
+      "path": "templates/secret/icon.png",
+      "threshold": 0.75
+    },
+    "secret_go": {
+      "path": "templates/secret/go.png",
+      "threshold": 0.75
+    },
+    "secret_deploy": {
+      "path": "templates/secret/deploy.png",
+      "threshold": 0.75
+    },
+    "secret_no_deploy": {
+      "path": "templates/secret/qd.png",
+      "threshold": 0.75
+    },
+    "secret_qd": {
+      "path": "templates/secret/qd.png",
+      "threshold": 0.75
+    },
+    "secret_refresh": {
+      "path": "templates/secret/refresh.png",
+      "threshold": 0.75
+    },
+    "secret_refresh_dias": {
+      "path": "templates/secret/refresh_dias.png",
+      "threshold": 0.75
+    },
+    "secret_task_1": {
+      "path": "templates/secret/task_1.png",
+      "threshold": 0.75
+    },
+    "secret_task_2": {
+      "path": "templates/secret/task_2.png",
+      "threshold": 0.75
+    },
+    "secret_task_3": {
+      "path": "templates/secret/task_3.png",
+      "threshold": 0.75
+    },
+    "secret_task_4": {
+      "path": "templates/secret/task_4.png",
       "threshold": 0.75
     }
   },

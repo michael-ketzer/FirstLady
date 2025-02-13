@@ -59,6 +59,10 @@
     "autoJoinRallys": {
       "handler": "src.automation.routines.autoJoinRallys.AutoJoinRallysRoutine",
       "interval": 10
+    },
+    "secretTask": {
+      "handler": "src.automation.routines.secretTask.SecretTaskRoutine",
+      "interval": 300
     }
   },
   "scheduled_events": {
