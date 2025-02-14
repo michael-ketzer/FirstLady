@@ -354,6 +354,10 @@
       "path": "templates/secret/refresh_dias.png",
       "threshold": 0.75
     },
+    "secret_refresh_dias_confirm": {
+      "path": "templates/secret/dias_confirm.png",
+      "threshold": 0.75
+    },
     "secret_task_1": {
       "path": "templates/secret/task_1.png",
       "threshold": 0.75
