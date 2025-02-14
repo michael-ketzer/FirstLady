@@ -63,6 +63,10 @@
     "secretTask": {
       "handler": "src.automation.routines.secretTask.SecretTaskRoutine",
       "interval": 60
+    },
+    "vsWeeklyTopList": {
+      "handler": "src.automation.routines.vsWeeklyTopList.VsWeeklyTopListRoutine",
+      "interval": null
     }
   },
   "scheduled_events": {

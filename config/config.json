@@ -369,6 +369,22 @@
     "secret_task_4": {
       "path": "templates/secret/task_4.png",
       "threshold": 0.75
+    },
+    "secret_task_5": {
+      "path": "templates/secret/task_5.png",
+      "threshold": 0.75
+    },
+    "vs_icon": {
+      "path": "templates/vs/icon.png",
+      "threshold": 0.75
+    },
+    "vs_ranking": {
+      "path": "templates/vs/ranking.png",
+      "threshold": 0.75
+    },
+    "vs_weekly": {
+      "path": "templates/vs/weekly.png",
+      "threshold": null
     }
   },
   "discord": {

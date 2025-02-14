@@ -56,17 +56,16 @@ class SecretTaskRoutine(TimeCheckRoutine):
                     if refresh_dia_loc:
                         app_logger.info("Found refresh diamonds button")
                         humanized_tap(self.device_id, refresh_dia_loc[0], refresh_dia_loc[1])
-                time.sleep(1)
+                time.sleep(0.2)
 
             self._deploy_first_task(all_go_loc)
             return True
             
     
     def _get_top_secret_task(self) -> tuple[int, int]:
-        task_loc = find_all_templates(self.device_id, "secret_task_1") + find_all_templates(self.device_id, "secret_task_2") + find_all_templates(self.device_id, "secret_task_3") + find_all_templates(self.device_id, "secret_task_4")
+        task_loc = find_all_templates(self.device_id, "secret_task_1") + find_all_templates(self.device_id, "secret_task_2") + find_all_templates(self.device_id, "secret_task_3") + find_all_templates(self.device_id, "secret_task_4") + find_all_templates(self.device_id, "secret_task_5")
 
         for x, y in task_loc:
-            app_logger.info(f"Found task at {x}, {y}")
             if y == 989:
                 return (x, y)
     

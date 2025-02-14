@@ -11,4 +11,5 @@ from .checkValentineGift import CheckValentineGiftRoutine
 from .autoInbox import AutoInboxRoutine
 from .autoJoinRallys import AutoJoinRallysRoutine
 from .secretTask import SecretTaskRoutine
+from .vsWeeklyTopList import VsWeeklyTopListRoutine
 #from .weeklyReset import WeeklyResetRoutine 
