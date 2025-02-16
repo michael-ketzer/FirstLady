@@ -12,4 +12,5 @@ from .autoInbox import AutoInboxRoutine
 from .autoJoinRallys import AutoJoinRallysRoutine
 from .secretTask import SecretTaskRoutine
 from .vsWeeklyTopList import VsWeeklyTopListRoutine
+from .autoRally import AutoRallyRoutine
 #from .weeklyReset import WeeklyResetRoutine 

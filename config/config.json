@@ -9,6 +9,7 @@
   "donate_alliance_interval": null,
   "screenshot_quality": 100,
   "match_threshold": 0.8,
+  "autoRallySquads": 3,
   "auto_inbox": "If you have any questions, please write King Julien directly, this chat is ignored. If you send a present, thank you! :)",
   "ui_elements": {
     "profile": {
@@ -82,6 +83,10 @@
     }
   },
   "templates": {
+    "banned_allys_dir": {
+      "path": "templates/alliances/banned",
+      "threshold": 0.75
+    },
     "base": {
       "path": "templates/ui/base.png",
       "threshold": 0.75
@@ -105,6 +110,30 @@
     "rally_back_home": {
       "path": "templates/rally/back_home_location.png",
       "threshold": 0.75
+    },
+    "rally_search": {
+      "path": "templates/rally/search.png",
+      "threshold": 0.75
+    },
+    "rally_doom_elite": {
+      "path": "templates/rally/doom_elite.png",
+      "threshold": 0.75
+    },
+    "rally_search_doom_elite": {
+      "path": "templates/rally/search_btn.png",
+      "threshold": 0.75
+    },
+    "rally_start": {
+      "path": "templates/rally/start_rally.png",
+      "threshold": 0.75
+    },
+    "rally_fight": {
+      "path": "templates/rally/rally.png",
+      "threshold": 0.75
+    },
+    "got_energy": {
+      "path": "templates/rally/energy.png",
+      "threshold": 0.9
     },
     "train_icon": {
       "path": "templates/train/icon.png",

@@ -3,7 +3,7 @@
 import cv2
 import numpy as np
 import time
-from typing import Optional, Tuple
+from typing import Optional, Tuple, List
 from .logging import app_logger
 from .device import take_screenshot
 from .config import CONFIG
@@ -22,6 +22,35 @@ def _load_template(template_name: str) -> Tuple[Optional[np.ndarray], Optional[d
         return None, None
         
     return template, template_config
+
+def _load_folder_templates(folder: str) -> Tuple[Optional[List[Tuple[str, np.ndarray]]], Optional[dict]]:
+    """Load all PNG files in folder and return their filenames along with the images."""
+    
+    template_config = CONFIG['templates'].get(folder)
+    if not template_config or 'path' not in template_config:
+        app_logger.error(f"Invalid template config for folder: {folder}")
+        return None, None
+
+    folder = f"config/{template_config['path']}"
+
+    png_files = [f for f in os.listdir(folder) if f.endswith(".png")]
+    app_logger.debug(f"Found {len(png_files)} files in config/{template_config['path']}")
+    
+    if not png_files:
+        app_logger.error(f"No templates found, skipping")
+        return None, None
+
+    # Load all images along with their filenames
+    templates = []
+    for png_file in png_files:
+        file_path = os.path.join(folder, png_file)
+        template = cv2.imread(file_path)
+        if template is None:
+            app_logger.error(f"Failed to load template: {file_path}")
+        else:
+            templates.append((png_file, template))  # Store as tuple (filename, image)
+
+    return templates, template_config
 
 def _take_and_load_screenshot(device_id: str) -> Optional[np.ndarray]:
     """Take and load a screenshot"""
@@ -265,3 +294,21 @@ def find_and_tap_template(
         humanized_tap(device_id, location[0], location[1])
         
     return True
+
+def is_banned_ally(allianceImage: Optional[np.ndarray] = None) -> Optional[str]:
+    """Check if an alliance image is banned and return the filename if found."""
+    banned_allys = CONFIG['templates'].get('banned_allys_dir')
+    if banned_allys is None:
+        return None  # No banned allies configured
+    
+    # Load all banned ally images
+    banned_ally_templates, banned_ally_config = _load_folder_templates('banned_allys_dir')
+    if banned_ally_templates is None:
+        return None  # No templates found
+
+    # Compare all ally images
+    for filename, template in banned_ally_templates:
+        if compare_screenshots(allianceImage, template):
+            return os.path.splitext(filename)[0]  # Return filename without .png
+
+    return None  # No match found

@@ -3,7 +3,7 @@ import cv2
 from src.automation.routines.routineBase import TimeCheckRoutine
 from src.core.logging import app_logger
 from src.core.config import CONFIG
-from src.core.image_processing import find_template, find_all_templates, wait_for_image, find_and_tap_template
+from src.core.image_processing import find_template, find_all_templates, wait_for_image, find_and_tap_template, is_banned_ally
 from src.core.device import take_screenshot
 from src.core.adb import get_screen_size, press_back
 from src.game.controls import human_delay, humanized_tap, handle_swipes
@@ -16,6 +16,7 @@ from src.core.text_detection import (
 from src.core.audio import play_beep
 from src.game.controls import navigate_home
 import time
+import numpy as np
 
 class SecretaryRoutine(TimeCheckRoutine):
     force_home: bool = True
@@ -194,47 +195,52 @@ class SecretaryRoutine(TimeCheckRoutine):
                     if screenshot is None:
                         continue
 
-                    alliance_text, original_text = extract_text_from_region(
-                        self.device_id, 
-                        alliance_region, 
-                        languages='eng', 
-                        img=screenshot
-                    )
-                    app_logger.info(f"Alliance: {alliance_text} ({original_text})")
+#                    alliance_text, original_text = extract_text_from_region(
+#                        self.device_id, 
+#                        alliance_region, 
+#                        languages='eng', 
+#                        img=screenshot
+#                    )
+
+
+                    x1, y1, x2, y2 = alliance_region
+                    cropped = screenshot[y1:y2, x1:x2]
+                    # Convert to grayscale
+                    gray = cv2.cvtColor(cropped, cv2.COLOR_BGR2GRAY)
                     
-                    if len(CONTROL_LIST['whitelist']['alliance']) > 0:
-                        if alliance_text in CONTROL_LIST['whitelist']['alliance']:
-                            humanized_tap(self.device_id, topmost_accept[0], topmost_accept[1])
-                            app_logger.debug(f"Tapping accept at coordinates: ({topmost_accept[0]}, {topmost_accept[1]})")
-                            app_logger.info(f"Accepted candidate with alliance: {alliance_text} for {name}")
-                            accepted += 1
-                        else:
-                            # Handle rejection
-                            app_logger.info(f"Rejecting candidate with alliance: {alliance_text} for {name}")
-                            log_rejected_alliance(alliance_text, original_text)
-                            
-                            if self.manual_deny:
-                                play_beep()
-                                input('Press Enter to continue...')
-                            
-                            # Try reject button first
-                            reject_buttons = self.find_reject_buttons()
-                            if reject_buttons:
-                                # Get topmost reject button
-                                reject_button = reject_buttons[0]
-                                # Verify it's aligned with our accept button vertically
-                                if abs(reject_button[1] - topmost_accept[1]) <= 10:  # 10 pixel tolerance
-                                    humanized_tap(self.device_id, reject_button[0], reject_button[1])
-                                    app_logger.debug(f"Tapping reject at coordinates: ({reject_button[0]}, {reject_button[1]})")
-                                    if not find_and_tap_template(
-                                        self.device_id,
-                                        "confirm",
-                                        error_msg="Failed to find confirm button",
-                                        critical=True
-                                    ):
-                                        continue
-                            else:
-                                # No reject buttons found, try confirm
+                    # Higher scale factor for better detail
+                    scale = 8
+                    enlarged = cv2.resize(gray, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
+                    
+                    # Simple binary threshold
+                    _, binary = cv2.threshold(enlarged, 127, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+                    
+                    # Optional: Add slight dilation to connect components
+                    kernel = np.ones((2,2), np.uint8)
+                    binary = cv2.dilate(binary, kernel, iterations=1)
+                    isBannedAlly = is_banned_ally(binary)
+
+                    if not isBannedAlly:
+                        humanized_tap(self.device_id, topmost_accept[0], topmost_accept[1])
+                        app_logger.debug(f"Tapping accept at coordinates: ({topmost_accept[0]}, {topmost_accept[1]})")
+                        accepted += 1
+                    else:
+                        # Handle rejection
+                        app_logger.info(f"Rejecting candidate with alliance: {isBannedAlly} for {name}")
+                        
+                        if self.manual_deny:
+                            play_beep()
+                            input('Press Enter to continue...')
+                        
+                        # Try reject button first
+                        reject_buttons = self.find_reject_buttons()
+                        if reject_buttons:
+                            # Get topmost reject button
+                            reject_button = reject_buttons[0]
+                            # Verify it's aligned with our accept button vertically
+                            if abs(reject_button[1] - topmost_accept[1]) <= 10:  # 10 pixel tolerance
+                                humanized_tap(self.device_id, reject_button[0], reject_button[1])
+                                app_logger.debug(f"Tapping reject at coordinates: ({reject_button[0]}, {reject_button[1]})")
                                 if not find_and_tap_template(
                                     self.device_id,
                                     "confirm",
@@ -242,15 +248,15 @@ class SecretaryRoutine(TimeCheckRoutine):
                                     critical=True
                                 ):
                                     continue
-                    else:
-                        # No whitelist - accept all
-                        if not find_and_tap_template(
-                            self.device_id,
-                            "accept",
-                            error_msg=f"Failed to accept candidate for {name}",
-                            success_msg=f"Accepting candidate for {name}"
-                        ):
-                            continue
+                        else:
+                            # No reject buttons found, try confirm
+                            if not find_and_tap_template(
+                                self.device_id,
+                                "confirm",
+                                error_msg="Failed to find confirm button",
+                                critical=True
+                            ):
+                                continue
                     
                     processed += 1
                     human_delay(CONFIG['timings']['settle_time'])

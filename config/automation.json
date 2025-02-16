@@ -26,7 +26,7 @@
     },
     "secretary": {
       "handler": "src.automation.routines.secretary.SecretaryRoutine",
-      "interval": 120
+      "interval": 60
     },
     "mapExchange": {
       "handler": "src.automation.routines.mapExchange.MapExchangeRoutine",
@@ -60,9 +60,13 @@
       "handler": "src.automation.routines.autoJoinRallys.AutoJoinRallysRoutine",
       "interval": 10
     },
+    "autoRally": {
+      "handler": "src.automation.routines.autoRally.AutoRallyRoutine",
+      "interval": 120
+    },
     "secretTask": {
       "handler": "src.automation.routines.secretTask.SecretTaskRoutine",
-      "interval": 600
+      "interval": 1200
     },
     "vsWeeklyTopList": {
       "handler": "src.automation.routines.vsWeeklyTopList.VsWeeklyTopListRoutine",
