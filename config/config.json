@@ -103,6 +103,10 @@
       "path": "templates/rally/available.png",
       "threshold": 0.75
     },
+    "zombie_rally_available": {
+      "path": "templates/rally/zombie.png",
+      "threshold": 0.75
+    },
     "rally_join": {
       "path": "templates/rally/join.png",
       "threshold": 0.75
@@ -133,7 +137,7 @@
     },
     "got_energy": {
       "path": "templates/rally/energy.png",
-      "threshold": 0.9
+      "threshold": 0.75
     },
     "train_icon": {
       "path": "templates/train/icon.png",

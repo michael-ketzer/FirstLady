@@ -26,7 +26,7 @@
     },
     "secretary": {
       "handler": "src.automation.routines.secretary.SecretaryRoutine",
-      "interval": 60
+      "interval": 240
     },
     "mapExchange": {
       "handler": "src.automation.routines.mapExchange.MapExchangeRoutine",
@@ -50,7 +50,7 @@
     },
     "collectValentineGifts": {
       "handler": "src.automation.routines.checkValentineGift.CheckValentineGiftRoutine",
-      "interval": 1000
+      "interval": null
     },
     "autoInbox": {
       "handler": "src.automation.routines.autoInbox.AutoInboxRoutine",
@@ -58,11 +58,11 @@
     },
     "autoJoinRallys": {
       "handler": "src.automation.routines.autoJoinRallys.AutoJoinRallysRoutine",
-      "interval": 10
+      "interval": 20
     },
     "autoRally": {
       "handler": "src.automation.routines.autoRally.AutoRallyRoutine",
-      "interval": 120
+      "interval": null
     },
     "secretTask": {
       "handler": "src.automation.routines.secretTask.SecretTaskRoutine",

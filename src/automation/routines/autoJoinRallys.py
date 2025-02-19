@@ -23,7 +23,31 @@ class AutoJoinRallysRoutine(TimeCheckRoutine):
             error_msg="No rally open at this time",
             success_msg="Starting rally join sequence!"
         ):
+            
             if find_and_tap_template(
+                self.device_id,
+                "zombie_rally_available",
+                error_msg="Could not find any zombie rallys",
+                success_msg="Starting joining zombie rally!"
+            ):
+                time.sleep(1)
+                if find_and_tap_template(
+                    self.device_id,
+                    "rally_join",
+                    error_msg="Could not join rally, all squads are out",
+                    success_msg="Joined zombie rally!"
+                ):
+                    time.sleep(1)
+                    find_and_tap_template(
+                        self.device_id,
+                        "rally_back_home",
+                        error_msg="Already on home screen",
+                        success_msg="Navigated back to home"
+                    )
+                    return True
+                else:
+                    press_back(self.device_id)
+            elif find_and_tap_template(
                 self.device_id,
                 "rally_available",
                 error_msg="Could not find any doom elite rallys",
