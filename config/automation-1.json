@@ -2,39 +2,39 @@
   "time_checks": {
     "cleanup": {
       "handler": "src.automation.routines.cleanup.CleanupRoutine",
-      "interval": 3600
+      "interval": null
     },
     "donate": {
       "handler": "src.automation.routines.allianceDonate.AllianceDonateRoutine",
-      "interval": 22000
+      "interval": null
     },
     "help": {
       "handler": "src.automation.routines.help.HelpRoutine",
-      "interval": 5
+      "interval": null
     },
     "dig": {
       "handler": "src.automation.routines.checkForDigs.CheckForDigsRoutine",
-      "interval": 5
+      "interval": null
     },
     "egg": {
       "handler": "src.automation.routines.checkForEggs.CheckForEggsRoutine",
-      "interval": 5
+      "interval": null
     },
     "collectTruck": {
       "handler": "src.automation.routines.collectTruck.CollectTruckRoutine",
-      "interval": 1000
+      "interval": null
     },
     "secretary": {
       "handler": "src.automation.routines.secretary.SecretaryRoutine",
-      "interval": 240
+      "interval": null
     },
     "mapExchange": {
       "handler": "src.automation.routines.mapExchange.MapExchangeRoutine",
-      "interval": 300
+      "interval": null
     },
     "gifts": {
       "handler": "src.automation.routines.allianceGifts.AllianceGiftsRoutine",
-      "interval": 5000
+      "interval": null
     },
     "collect_resources": {
       "handler": "src.automation.routines.collectResources.CollectResourcesRoutine",
@@ -42,7 +42,7 @@
     },
     "survivors": {
       "handler": "src.automation.routines.checkSurvivors.CheckNewSurvivorsRoutine",
-      "interval": 300
+      "interval": null
     },
     "trainOnboarding": {
       "handler": "src.automation.routines.checkTrainJoin.CheckTrainJoinRoutine",
@@ -58,7 +58,7 @@
     },
     "autoJoinRallys": {
       "handler": "src.automation.routines.autoJoinRallys.AutoJoinRallysRoutine",
-      "interval": 20
+      "interval": 1
     },
     "autoRally": {
       "handler": "src.automation.routines.autoRally.AutoRallyRoutine",

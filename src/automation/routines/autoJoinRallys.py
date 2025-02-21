@@ -1,7 +1,10 @@
 from src.automation.routines.routineBase import TimeCheckRoutine
-from src.core.image_processing import find_and_tap_template
+from src.core.image_processing import find_and_tap_template, find_template
 import time
-from src.core.adb import press_back
+from src.core.adb import press_back, tap_screen
+from src.game.controls import navigate_home
+import random
+from src.core.logging import app_logger
 
 class AutoJoinRallysRoutine(TimeCheckRoutine):
     def _execute(self) -> bool:
@@ -26,51 +29,41 @@ class AutoJoinRallysRoutine(TimeCheckRoutine):
             
             if find_and_tap_template(
                 self.device_id,
-                "zombie_rally_available",
-                error_msg="Could not find any zombie rallys",
-                success_msg="Starting joining zombie rally!"
-            ):
-                time.sleep(1)
-                if find_and_tap_template(
-                    self.device_id,
-                    "rally_join",
-                    error_msg="Could not join rally, all squads are out",
-                    success_msg="Joined zombie rally!"
-                ):
-                    time.sleep(1)
-                    find_and_tap_template(
-                        self.device_id,
-                        "rally_back_home",
-                        error_msg="Already on home screen",
-                        success_msg="Navigated back to home"
-                    )
-                    return True
-                else:
-                    press_back(self.device_id)
-            elif find_and_tap_template(
-                self.device_id,
                 "rally_available",
-                error_msg="Could not find any doom elite rallys",
-                success_msg="Starting join sequence!"
+                error_msg="Could not find any rallys",
+                success_msg="Starting joining rally!"
             ):
-                time.sleep(1)
-                if find_and_tap_template(
-                    self.device_id,
-                    "rally_join",
-                    error_msg="Could not join rally, all squads are out",
-                    success_msg="Joined doom rally!"
-                ):
-                    time.sleep(1)
-                    find_and_tap_template(
+                time.sleep(0.2)
+
+                zzz_loc = find_template(self.device_id, 'rally_zzz')
+                if zzz_loc:
+                    tap_screen(self.device_id, zzz_loc[0], zzz_loc[1])
+                    
+                    if find_and_tap_template(
                         self.device_id,
-                        "rally_back_home",
-                        error_msg="Already on home screen",
-                        success_msg="Navigated back to home"
-                    )
-                    return True
+                        "rally_join",
+                        error_msg="Could not rally, all squads are out",
+                        success_msg="Joined rally!"
+                    ):
+                        time.sleep(0.2)
+                    
+                        find_and_tap_template(
+                            self.device_id,
+                            "rally_back_home",
+                            error_msg="Already on home screen",
+                            success_msg="Navigated back to home"
+                        )
+                        time.sleep(round(random.uniform(0.1, 1), 2))
+                        return True
+                    else:
+                        navigate_home(self.device_id)
                 else:
-                    press_back(self.device_id)
+                    app_logger.info('Got no team at home, not joining rally')
+                    navigate_home(self.device_id)
             else:
-                press_back(self.device_id)
+                navigate_home(self.device_id)
+
+            time.sleep(round(random.uniform(0.1, 1), 2))
+            
 
         return True 

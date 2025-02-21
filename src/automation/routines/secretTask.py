@@ -70,7 +70,7 @@ class SecretTaskRoutine(TimeCheckRoutine):
         task_loc = find_all_templates(self.device_id, "secret_task_1") + find_all_templates(self.device_id, "secret_task_2") + find_all_templates(self.device_id, "secret_task_3") + find_all_templates(self.device_id, "secret_task_4") + find_all_templates(self.device_id, "secret_task_5")
 
         for x, y in task_loc:
-            if y > 980 and y < 1000:
+            if y > 920 and y < 1000:
                 return (x, y)
     
     def _has_secret_task_on_top(self) -> bool:
@@ -84,7 +84,9 @@ class SecretTaskRoutine(TimeCheckRoutine):
     def _deploy_first_task(self, go_loc: tuple[int, int]) -> bool:
         # find the respected go button
         for locX, locY in go_loc:
-            if locY > 969 and locY < 1123:
+            app_logger.info(f"y: {locY}")
+
+            if locY > 920 and locY < 1123:
                 app_logger.info("Found go button")
                 humanized_tap(self.device_id, locX, locY)
                 time.sleep(2)
