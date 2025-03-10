@@ -45,8 +45,12 @@ class SecretTaskRoutine(TimeCheckRoutine):
                 app_logger.info('No available secret tasks found')
                 return True
             
-            while not self._has_secret_task_on_top():
+            refresh_limit = 0
+
+            # loop only as long as no secret task in sight and refresh_limit is below 5
+            while not self._has_secret_task_on_top() and refresh_limit < 5:
                 app_logger.info('Finding secret task')
+                refresh_limit += 1
                 refresh_loc = find_template(self.device_id, "secret_refresh")
                 if refresh_loc:
                     app_logger.info("Found refresh button")
@@ -62,7 +66,9 @@ class SecretTaskRoutine(TimeCheckRoutine):
                             humanized_tap(self.device_id, confirm_loc[0], confirm_loc[1])
                 time.sleep(0.2)
 
-            self._deploy_first_task(all_go_loc)
+            if self._has_secret_task_on_top():
+                self._deploy_first_task(all_go_loc)
+                
             return True
             
     

@@ -39,7 +39,7 @@ def get_text_regions(
     app_logger.debug(f"Accept button location: {accept_location}")
     
     # Calculate initial search region aligned with accept button
-    x_offset = int(width * 0.48)
+    x_offset = int(width * 0.35)
     y_offset = int(height * 0.015)  # 1.5% vertical search area
     
     # Get template size to ensure minimum search region
@@ -53,7 +53,7 @@ def get_text_regions(
     
     # Search region centered on accept button's vertical position, shifted up slightly
     x1 = max(0, accept_location[0] - x_offset)
-    y1 = max(0, accept_location[1] - y_offset - int(height * 0.02))  # Shift up by 2%
+    y1 = max(0, accept_location[1] - y_offset - int(height * 0.03))  # Shift up by 2%
     y2 = min(height, y1 + int(height * 0.025))  # Fixed height of 2.5%
     x2 = accept_location[0] - int(width * 0.02)
     
@@ -99,7 +99,7 @@ def get_text_regions(
     valid_right = []
     
     for left in left_brackets:
-        if abs(left[1] - accept_location[1]) <= int(height * 0.02):  # Must be within 2% of accept button
+        if abs(left[1] - accept_location[1]) <= int(height * 0.04):  # Must be within 2% of accept button
             for right in right_brackets:
                 if abs(right[1] - left[1]) <= 8:  # Brackets must align with each other
                     x_distance = right[0] - left[0]
@@ -124,7 +124,7 @@ def get_text_regions(
         # Now use bracket_width in region calculations
         alliance_region = (
             left_bracket[0] + bracket_width - 5,
-            max(0, y_center - y_padding),
+            max(0, y_center - y_padding - 5),
             right_bracket[0] - 8,
             min(height, y_center + y_padding)
         )

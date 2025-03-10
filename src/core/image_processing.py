@@ -214,9 +214,9 @@ def compare_screenshots(img1: np.ndarray, img2: np.ndarray) -> bool:
     """
     if img1 is None or img2 is None:
         return False
-        
+    
     if img1.shape != img2.shape:
-        return False
+        return np.array_equal(img1, img2)
         
     # Calculate structural similarity index
     score = cv2.matchTemplate(img1, img2, cv2.TM_CCOEFF_NORMED)[0][0]
@@ -304,10 +304,30 @@ def is_banned_ally(allianceImage: Optional[np.ndarray] = None) -> Optional[str]:
     # Load all banned ally images
     banned_ally_templates, banned_ally_config = _load_folder_templates('banned_allys_dir')
     if banned_ally_templates is None:
+        app_logger.info('No banned ally templates found')
         return None  # No templates found
 
     # Compare all ally images
     for filename, template in banned_ally_templates:
+        if compare_screenshots(allianceImage, template):
+            return os.path.splitext(filename)[0]  # Return filename without .png
+
+    return None  # No match found
+
+def is_whitelisted_ally(allianceImage: Optional[np.ndarray] = None) -> Optional[str]:
+    """Check if an alliance image is banned and return the filename if found."""
+    whitelisted_allys = CONFIG['templates'].get('whitelisted_allys_dir')
+    if whitelisted_allys is None:
+        return None  # No banned allies configured
+    
+    # Load all banned ally images
+    whitelisted_ally_templates, whitelisted_ally_config = _load_folder_templates('whitelisted_allys_dir')
+    if whitelisted_ally_templates is None:
+        app_logger.info('No whitelisted ally templates found')
+        return None  # No templates found
+
+    # Compare all ally images
+    for filename, template in whitelisted_ally_templates:
         if compare_screenshots(allianceImage, template):
             return os.path.splitext(filename)[0]  # Return filename without .png
 
