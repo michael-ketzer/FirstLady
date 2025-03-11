@@ -135,6 +135,34 @@
       "path": "templates/rally/rally.png",
       "threshold": 0.75
     },
+    "heal_icon": {
+      "path": "templates/rally/heal_available.png",
+      "threshold": 0.75
+    },
+    "heal_start": {
+      "path": "templates/rally/heal_button.png",
+      "threshold": 0.75
+    },
+    "heal_ask_for_help": {
+      "path": "templates/rally/heal_ask_for_help.png",
+      "threshold": 0.75
+    },
+    "heal_collect": {
+      "path": "templates/rally/heal_finished.png",
+      "threshold": 0.75
+    },
+    "collect_rally_icon": {
+      "path": "templates/rally/collect_all.png",
+      "threshold": 0.75
+    },
+    "collect_rally_claim": {
+      "path": "templates/rally/collect_claim.png",
+      "threshold": 0.75
+    },
+    "collect_rally_confirm": {
+      "path": "templates/rally/collect_confirm.png",
+      "threshold": 0.75
+    },
     "got_energy": {
       "path": "templates/rally/energy.png",
       "threshold": 0.75

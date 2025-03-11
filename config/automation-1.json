@@ -10,7 +10,7 @@
     },
     "help": {
       "handler": "src.automation.routines.help.HelpRoutine",
-      "interval": null
+      "interval": 15
     },
     "dig": {
       "handler": "src.automation.routines.checkForDigs.CheckForDigsRoutine",
@@ -59,6 +59,10 @@
     "autoJoinRallys": {
       "handler": "src.automation.routines.autoJoinRallys.AutoJoinRallysRoutine",
       "interval": 1
+    },
+    "autoHeal": {
+      "handler": "src.automation.routines.autoHeal.AutoHealRoutine",
+      "interval": 30
     },
     "autoRally": {
       "handler": "src.automation.routines.autoRally.AutoRallyRoutine",

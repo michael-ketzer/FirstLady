@@ -2,7 +2,7 @@ from src.automation.routines.routineBase import TimeCheckRoutine
 from src.core.image_processing import find_and_tap_template, find_template
 import time
 from src.core.adb import press_back, tap_screen
-from src.game.controls import navigate_home
+from src.game.controls import navigate_home,humanized_tap
 import random
 from src.core.logging import app_logger
 
@@ -19,6 +19,18 @@ class AutoJoinRallysRoutine(TimeCheckRoutine):
             success_msg="Opened map screen"
         ):
             time.sleep(1)
+
+        if find_and_tap_template(self.device_id, 'collect_rally_icon'):
+            time.sleep(0.2)
+
+            claim_loc = find_template(self.device_id, 'collect_rally_claim')
+            confirm_loc = find_template(self.device_id, 'collect_rally_confirm')
+            if claim_loc:
+                humanized_tap(self.device_id, claim_loc[0], claim_loc[1])
+                time.sleep(0.2)
+            if confirm_loc:
+                humanized_tap(self.device_id, confirm_loc[0], confirm_loc[1])
+                time.sleep(0.2)
 
         if find_and_tap_template(
             self.device_id,

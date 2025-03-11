@@ -13,4 +13,5 @@ from .autoJoinRallys import AutoJoinRallysRoutine
 from .secretTask import SecretTaskRoutine
 from .vsWeeklyTopList import VsWeeklyTopListRoutine
 from .autoRally import AutoRallyRoutine
+from .autoHeal import AutoHealRoutine
 #from .weeklyReset import WeeklyResetRoutine 
