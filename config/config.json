@@ -33,9 +33,9 @@
       "y": "90%"
     },
     "swipe": {
-      "start_x": "50%",
-      "start_y": "30%",
-      "end_x": "50%",
+      "start_x": "20%",
+      "start_y": "40%",
+      "end_x": "20%",
       "end_y": "80%"
     }
   },
@@ -85,6 +85,10 @@
   "templates": {
     "banned_allys_dir": {
       "path": "templates/alliances/banned",
+      "threshold": 0.75
+    },
+    "whitelisted_allys_dir": {
+      "path": "templates/alliances/whitelist",
       "threshold": 0.75
     },
     "base": {
@@ -197,19 +201,23 @@
     },
     "left_bracket": {
       "path": "templates/ui/left_bracket.png",
-      "threshold": 0.75
+      "threshold": 0.9
     },
     "right_bracket": {
       "path": "templates/ui/right_bracket.png",
-      "threshold": 0.75
+      "threshold": 0.9
     },
     "left_bracket_blue": {
       "path": "templates/ui/left_bracket_blue.png",
-      "threshold": 0.75
+      "threshold": 0.9
     },
     "right_bracket_blue": {
       "path": "templates/ui/right_bracket_blue.png",
-      "threshold": 0.75
+      "threshold": 0.9
+    },
+    "reject_confirm": {
+      "path": "templates/ui/reject_confirm.png",
+      "threshold": 0.95
     },
     "accept": {
       "path": "templates/secretary/accept.png",

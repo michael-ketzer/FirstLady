@@ -71,7 +71,7 @@ def cleanup_temp_files() -> None:
             for item in tmp_dir.iterdir():
                 try:
                     if item.is_file():
-                        item.unlink()
+                        #item.unlink()
                         app_logger.debug(f"Cleaned up temporary file: {item}")
                     elif item.is_dir():
                         shutil.rmtree(item, ignore_errors=True)
