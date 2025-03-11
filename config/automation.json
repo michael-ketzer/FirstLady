@@ -18,7 +18,7 @@
     },
     "egg": {
       "handler": "src.automation.routines.checkForEggs.CheckForEggsRoutine",
-      "interval": 5
+      "interval": null
     },
     "collectTruck": {
       "handler": "src.automation.routines.collectTruck.CollectTruckRoutine",

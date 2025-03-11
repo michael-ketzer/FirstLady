@@ -211,6 +211,8 @@ class SecretaryRoutine(TimeCheckRoutine):
                             is_rejected = True
                         elif ((now.weekday() == 2 and now.hour >= 3) or (now.weekday() == 3 and now.hour < 3)) and (name == 'science' or name == 'administrative'):
                             is_rejected = True
+                    else: 
+                        app_logger.info(f"Application for {isWhitelistedAlly} is whitelisted for {name} position")
 
                     if not is_rejected:
                         humanized_tap(self.device_id, topmost_accept[0], topmost_accept[1])
