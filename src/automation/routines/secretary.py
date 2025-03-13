@@ -205,14 +205,28 @@ class SecretaryRoutine(TimeCheckRoutine):
 
                     is_rejected = bool(isBannedAlly)
 
+                    if isWhitelistedAlly:
+                        app_logger.info(f"Whitelisted application received for {isWhitelistedAlly} for {name} position")
+
+                    if isBannedAlly:
+                        app_logger.info(f"Banned application received for {isBannedAlly} for {name} position")
+
                     now = datetime.now()
-                    if not isWhitelistedAlly:
-                        if ((now.weekday() == 1 and now.hour >= 3) or (now.weekday() == 2 and now.hour < 3)) and (name == 'development' or name == 'administrative'):
-                            is_rejected = True
-                        elif ((now.weekday() == 2 and now.hour >= 3) or (now.weekday() == 3 and now.hour < 3)) and (name == 'science' or name == 'administrative'):
-                            is_rejected = True
-                    else: 
-                        app_logger.info(f"Application for {isWhitelistedAlly} is whitelisted for {name} position")
+                    
+                    #if not isWhitelistedAlly:
+                    #    if ((now.weekday() == 1 and now.hour >= 3) or (now.weekday() == 2 and now.hour < 3)) and (name == 'development' or name == 'administrative'):
+                    #        is_rejected = True
+                    #    elif ((now.weekday() == 2 and now.hour >= 3) or (now.weekday() == 3 and now.hour < 3)) and (name == 'science' or name == 'administrative'):
+                    #        is_rejected = True
+                    #else: 
+                    #    app_logger.info(f"Application for {isWhitelistedAlly} is whitelisted for {name} position")
+
+                    #if is_rejected: 
+                    #    play_beep()
+                    #    result = input('Reject this candidate? [y/n]')
+                    #    if result.lower() == 'n':
+                    #        app_logger.info(f"Skipped rejection candidate for office {name}")
+                    #        is_rejected = False
 
                     if not is_rejected:
                         humanized_tap(self.device_id, topmost_accept[0], topmost_accept[1])
@@ -220,8 +234,12 @@ class SecretaryRoutine(TimeCheckRoutine):
                         accepted += 1
                     else:
                         # Handle rejection
-                        app_logger.info(f"Rejecting candidate with alliance: {isBannedAlly} for {name}")
-                        
+                        if isBannedAlly:
+                            app_logger.info(f"Rejecting candidate with alliance: {isBannedAlly} for {name}")
+                        else:
+                            app_logger.info(f"Rejecting candidate for {name}, not whitelisted")
+                
+                    
                         # Try reject button first
                         reject_buttons = self.find_reject_buttons()
                         if reject_buttons:

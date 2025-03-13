@@ -3,7 +3,7 @@ from src.core.image_processing import find_and_tap_template, find_all_templates,
 import time
 from src.core.adb import press_back
 from src.core.logging import app_logger
-from src.game.controls import humanized_tap
+from src.game.controls import humanized_tap,navigate_home
 
 class SecretTaskRoutine(TimeCheckRoutine):
     def _execute(self) -> bool:
@@ -43,6 +43,7 @@ class SecretTaskRoutine(TimeCheckRoutine):
             all_go_loc = find_all_templates(self.device_id, "secret_go")
             if len(all_go_loc) == 0:
                 app_logger.info('No available secret tasks found')
+                navigate_home(self.device_id, True)
                 return True
             
             refresh_limit = 0

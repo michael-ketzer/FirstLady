@@ -7,7 +7,7 @@ import re
 from typing import Tuple, Optional, Union, List, Dict, Any
 from .logging import app_logger
 from .device import take_screenshot, get_screen_size
-from .image_processing import _load_template, _take_and_load_screenshot, find_template, find_all_templates
+from .image_processing import _load_template, _take_and_load_screenshot, find_all_templates
 from .config import CONFIG
 from .debug import save_debug_region
 import numpy as np
@@ -39,7 +39,7 @@ def get_text_regions(
     app_logger.debug(f"Accept button location: {accept_location}")
     
     # Calculate initial search region aligned with accept button
-    x_offset = int(width * 0.35)
+    x_offset = int(width * 0.3)
     y_offset = int(height * 0.015)  # 1.5% vertical search area
     
     # Get template size to ensure minimum search region
@@ -52,16 +52,16 @@ def get_text_regions(
         min_height = int(height * 0.03)
     
     # Search region centered on accept button's vertical position, shifted up slightly
-    x1 = max(0, accept_location[0] - x_offset)
-    y1 = max(0, accept_location[1] - y_offset - int(height * 0.03))  # Shift up by 2%
-    y2 = min(height, y1 + int(height * 0.025))  # Fixed height of 2.5%
-    x2 = accept_location[0] - int(width * 0.02)
+    x1 = 250 #max(0, accept_location[0] - x_offset)
+    y1 = 380 #max(0, accept_location[1] - y_offset - int(height * 0.03))  # Shift up by 2%
+    y2 = 450 #min(height, y1 + int(height * 0.025))  # Fixed height of 2.5%
+    x2 = 450 #accept_location[0] - int(width * 0.02)
     
     # Ensure minimum region size
-    if x2 - x1 < min_width:
-        x2 = min(width, x1 + min_width)
-    if y2 - y1 < min_height:
-        y2 = min(height, y1 + min_height)
+    #if x2 - x1 < min_width:
+    #    x2 = min(width, x1 + min_width)
+    #if y2 - y1 < min_height:
+    #    y2 = min(height, y1 + min_height)
     
     # Take screenshot and crop to search region
     if not take_screenshot(device_id):
