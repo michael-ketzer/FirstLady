@@ -1,7 +1,3 @@
-[  !["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/notenough)
-
-If you find this tool helpful, consider supporting the development by buying me a coffee! ☕
-
 # Game Automation
 
 An automation tool for managing game tasks efficiently, including secretary management, alliance donations, and scheduled events.
