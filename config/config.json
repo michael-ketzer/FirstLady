@@ -14,7 +14,7 @@
   "ui_elements": {
     "profile": {
       "x": "4%",
-      "y": "8%"
+      "y": "6%"
     },
     "secretary_menu": {
       "x": "70%",
@@ -458,6 +458,54 @@
     "vs_weekly": {
       "path": "templates/vs/weekly.png",
       "threshold": null
+    },
+    "ranglist_back": {
+      "path": "templates/ranglist/back.png",
+      "threshold": 0.75
+    },
+    "ranglist_search_friend": {
+      "path": "templates/ranglist/friend.png",
+      "threshold": 0.75
+    },
+    "ranglist_search_go": {
+      "path": "templates/ranglist/go.png",
+      "threshold": 0.75
+    },
+    "ranglist_hero_power": {
+      "path": "templates/ranglist/hero_power.png",
+      "threshold": 0.75
+    },
+    "ranglist_alliance_power": {
+      "path": "templates/ranglist/alliance_power.png",
+      "threshold": 0.75
+    },
+    "ranglist_alliance_kills": {
+      "path": "templates/ranglist/kills.png",
+      "threshold": 0.75
+    },
+    "ranglist_strongest_hero": {
+      "path": "templates/ranglist/strongest_hero.png",
+      "threshold": 0.75
+    },
+    "ranglist_individual_power": {
+      "path": "templates/ranglist/individual_power.png",
+      "threshold": 0.75
+    },
+    "ranglist_rankings": {
+      "path": "templates/ranglist/rankings.png",
+      "threshold": 0.75
+    },
+    "ranglist_search": {
+      "path": "templates/ranglist/search.png",
+      "threshold": 0.75
+    },
+    "ranglist_search_special": {
+      "path": "templates/ranglist/special.png",
+      "threshold": 0.75
+    },
+    "ranglist_servers_dir": {
+      "path": "templates/ranglist/servers",
+      "threshold": 0.75
     }
   },
   "discord": {
@@ -474,5 +522,9 @@
       "embed_value": "A new egg has been posted! Get in there quick!",
       "embed_color": "0xFF0000"
     }
+  },
+  "ranglist": {
+    "api_url": "http://localhost:3000/api/ranglist/upload",
+    "api_key": "haselfasel"
   }
 }

@@ -58,7 +58,7 @@
     },
     "autoJoinRallys": {
       "handler": "src.automation.routines.autoJoinRallys.AutoJoinRallysRoutine",
-      "interval":null
+      "interval": null
     },
     "autoRally": {
       "handler": "src.automation.routines.autoRally.AutoRallyRoutine",
@@ -71,6 +71,10 @@
     "vsWeeklyTopList": {
       "handler": "src.automation.routines.vsWeeklyTopList.VsWeeklyTopListRoutine",
       "interval": null
+    },
+    "dailyRangList": {
+      "handler": "src.automation.routines.dailyRangList.DailyRangListRoutine",
+      "interval": 60
     }
   },
   "scheduled_events": {

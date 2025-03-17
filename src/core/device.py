@@ -33,6 +33,35 @@ def take_screenshot(device_id: str) -> bool:
         app_logger.error(f"Error taking screenshot: {e}")
         return False
 
+
+def save_screenshot(device_id: str, location: str) -> bool:
+    """Take screenshot and pull to local tmp directory"""
+    try:
+        ensure_dir("tmp")
+        
+        # Take screenshot on device
+        cmd = f"adb -s {device_id} shell screencap -p /sdcard/screen.png"
+        result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
+        if result.returncode != 0:
+            app_logger.error(f"Failed to take screenshot: {result.stderr}")
+            return False
+            
+        # Pull screenshot to local tmp directory
+        cmd = f"adb -s {device_id} pull /sdcard/screen.png tmp/{location}.png"
+        result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
+        if result.returncode != 0:
+            app_logger.error(f"Failed to pull screenshot: {result.stderr}")
+            return False
+            
+        # Clean up device screenshot
+        cleanup_device_screenshots(device_id)
+        return True
+        
+    except Exception as e:
+        app_logger.error(f"Error taking screenshot: {e}")
+        return False
+
+
 def get_screen_size(device_id: str) -> Tuple[int, int]:
     """Get screen size from device"""
     try:

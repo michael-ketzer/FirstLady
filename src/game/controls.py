@@ -12,11 +12,11 @@ def human_delay(delay: float):
     """Add a human-like delay between actions"""
     time.sleep(delay * CONFIG.get('sleep_multiplier', 1.0))
 
-def handle_swipes(device_id: str, direction: str = "up", num_swipes: int = 8) -> None:
+def handle_swipes(device_id: str, direction: str = "up", num_swipes: int = 8, custom_swipe_cfg: dict = None) -> None:
     """Handle scrolling with swipes"""
     width, height = get_screen_size(device_id)
     
-    swipe_cfg = CONFIG['ui_elements']['swipe']
+    swipe_cfg = custom_swipe_cfg or CONFIG['ui_elements']['swipe']
     variance_pct = float(CONFIG['randomization']['swipe_variance']['position'].strip('%')) / 100
     
     for i in range(num_swipes):
@@ -44,6 +44,29 @@ def handle_swipes(device_id: str, direction: str = "up", num_swipes: int = 8) ->
         
         swipe_screen(device_id, start_x, start_y, end_x, end_y, duration)
         human_delay(CONFIG['timings']['scroll_delay'])
+
+
+def exact_handle_swipes(device_id: str, direction: str = "up", num_swipes: int = 8, custom_swipe_cfg: dict = None) -> None:
+    """Handle scrolling with swipes"""
+    width, height = get_screen_size(device_id)
+    
+    swipe_cfg = custom_swipe_cfg or CONFIG['ui_elements']['swipe']
+    
+    for i in range(num_swipes):
+        if direction == "up":
+            start_x = int(width * float(swipe_cfg['start_x'].strip('%')) / 100)
+            start_y = int(height * float(swipe_cfg['start_y'].strip('%')) / 100)
+            end_x = int(width * float(swipe_cfg['end_x'].strip('%')) / 100)
+            end_y = int(height * float(swipe_cfg['end_y'].strip('%')) / 100)
+        else:  # down
+            start_x = int(width * float(swipe_cfg['start_x'].strip('%')) / 100)
+            start_y = int(height * float(swipe_cfg['end_y'].strip('%')) / 100)
+            end_x = int(width * float(swipe_cfg['end_x'].strip('%')) / 100)
+            end_y = int(height * float(swipe_cfg['start_y'].strip('%')) / 100)
+
+        swipe_screen(device_id, start_x, start_y, end_x, end_y, 400)
+        time.sleep(2)
+
 
 def humanized_tap(device_id: str, x: int, y: int, critical: bool = False, delay: float = None) -> None:
     """Perform a humanized tap with randomization and delay

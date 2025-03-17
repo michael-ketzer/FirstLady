@@ -64,6 +64,34 @@ def _take_and_load_screenshot(device_id: str) -> Optional[np.ndarray]:
         
     return img
 
+
+def includes_image(
+    device_id: str,
+    matchingImage: np.ndarray
+) -> bool:
+    # Take screenshot first
+    if not take_screenshot(device_id):
+        app_logger.error("Failed to take screenshot")
+        return None
+        
+    img = cv2.imread('tmp/screen.png')
+    if img is None:
+        app_logger.debug("Failed to load screenshot")
+        return None
+        
+    # app_logger.debug(f"Screenshot loaded successfully. Shape: {img.shape}")
+    
+    # Match template
+    result = cv2.matchTemplate(img, matchingImage, cv2.TM_CCOEFF_NORMED)
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+    
+    # Fix the threshold comparison
+    if max_val < .99:  # Remove the incorrect "threshold - -0.16"
+        return False    
+    
+    return True
+        
+
 def find_template(
     device_id: str,
     template_name: str
@@ -112,7 +140,7 @@ def find_template(
         h, w = template.shape[:2]
         cv2.rectangle(debug_img, max_loc, (max_loc[0] + w, max_loc[1] + h), (0, 255, 0), 2)
         cv2.putText(debug_img, f"{max_val:.3f}", (max_loc[0], max_loc[1] - 5),
-                   cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
+            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
         cv2.imwrite(f'tmp/debug_find_{template_name}.png', debug_img)
         
         # Get template dimensions and calculate center point
@@ -125,6 +153,7 @@ def find_template(
     except Exception as e:
         app_logger.error(f"Error finding template {template_name}: {e}")
         return None
+    
     
 def find_all_templates(
     device_id: str,
@@ -332,6 +361,27 @@ def is_whitelisted_ally(allianceImage: Optional[np.ndarray] = None) -> Optional[
     # Compare all ally images
     for filename, template in whitelisted_ally_templates:
         if compare_screenshots(allianceImage, template):
+            return os.path.splitext(filename)[0]  # Return filename without .png
+
+    return None  # No match found
+
+def get_server(device_id: str) -> Optional[str]:
+    ranglist_servers = CONFIG['templates'].get('ranglist_servers_dir')
+    if ranglist_servers is None:
+        return None  # No banned allies configured
+    
+    # Load all banned ally images
+    source_images, _config = _load_folder_templates('ranglist_servers_dir')
+    if source_images is None:
+        app_logger.info('No whitelisted ally templates found')
+        return None  # No templates found
+    
+
+    app_logger.debug(f"Found {len(source_images)} server matching templates")
+
+    # Compare all ally images
+    for filename, template in source_images:
+        if includes_image(device_id=device_id, matchingImage=template):
             return os.path.splitext(filename)[0]  # Return filename without .png
 
     return None  # No match found
