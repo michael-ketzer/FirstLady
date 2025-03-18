@@ -111,6 +111,9 @@ class DailyRangListRoutine(TimeCheckRoutine):
                 error_msg="Could not find alliance rankings button",
             ):
                 server = get_server(self.device_id)
+                if not server:
+                    app_logger.error("Could not find server")
+                    server = input('Please enter server id:')
                 app_logger.info(f"Recording alliance power on server {server}")
                 self._record_ranglist(location=f"{server}_alliance_power", server=server, type="ALLIANCE_RANGLIST")
 

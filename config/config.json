@@ -524,7 +524,7 @@
     }
   },
   "ranglist": {
-    "api_url": "http://localhost:3000/api/ranglist/upload",
+    "api_url": "https://groups.1153.info/api/ranglist/upload",
     "api_key": "haselfasel"
   }
 }
