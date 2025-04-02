@@ -1,6 +1,6 @@
 {
   "package_name": "com.fun.lastwar.gp",
-  "sleep_multiplier": 1.0,
+  "sleep_multiplier": 0.8,
   "debug_mode": true,
   "max_retries": 3,
   "max_home_attempts": 500,
@@ -40,7 +40,7 @@
     }
   },
   "timings": {
-    "tap_delay": 0.5,
+    "tap_delay": 0.2,
     "menu_animation": 1,
     "list_animation": 1,
     "swipe_duration": {
@@ -105,7 +105,7 @@
     },
     "rally_available": {
       "path": "templates/rally/available.png",
-      "threshold": 0.75
+      "threshold": 0.9
     },
     "rally_join": {
       "path": "templates/rally/join.png",
@@ -133,7 +133,7 @@
     },
     "rally_zzz": {
       "path": "templates/rally/zzz.png",
-      "threshold": 0.75
+      "threshold": 0.6
     },
     "rally_fight": {
       "path": "templates/rally/rally.png",
@@ -465,7 +465,7 @@
     },
     "ranglist_search_friend": {
       "path": "templates/ranglist/friend.png",
-      "threshold": 0.75
+      "threshold": 0.5
     },
     "ranglist_search_go": {
       "path": "templates/ranglist/go.png",
@@ -501,7 +501,7 @@
     },
     "ranglist_search_special": {
       "path": "templates/ranglist/special.png",
-      "threshold": 0.75
+      "threshold": 0.5
     },
     "ranglist_servers_dir": {
       "path": "templates/ranglist/servers",

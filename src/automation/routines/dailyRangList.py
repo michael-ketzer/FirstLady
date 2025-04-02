@@ -1,3 +1,4 @@
+
 from src.automation.routines.routineBase import TimeCheckRoutine
 from src.core.image_processing import find_and_tap_template, find_all_templates, get_server
 import time
@@ -8,6 +9,7 @@ from src.core.config import CONFIG
 from src.core.device import save_screenshot
 import aiohttp
 import asyncio
+from src.core.audio import play_beep
 
 
 class DailyRangListRoutine(TimeCheckRoutine):
@@ -112,6 +114,7 @@ class DailyRangListRoutine(TimeCheckRoutine):
             ):
                 server = get_server(self.device_id)
                 if not server:
+                    play_beep()
                     app_logger.error("Could not find server")
                     server = input('Please enter server id:')
                 app_logger.info(f"Recording alliance power on server {server}")

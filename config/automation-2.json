@@ -2,15 +2,15 @@
   "time_checks": {
     "cleanup": {
       "handler": "src.automation.routines.cleanup.CleanupRoutine",
-      "interval": null
+      "interval": 3600
     },
     "donate": {
       "handler": "src.automation.routines.allianceDonate.AllianceDonateRoutine",
-      "interval": null
+      "interval": 22000
     },
     "help": {
       "handler": "src.automation.routines.help.HelpRoutine",
-      "interval": 15
+      "interval": 5
     },
     "dig": {
       "handler": "src.automation.routines.checkForDigs.CheckForDigsRoutine",
@@ -22,19 +22,19 @@
     },
     "collectTruck": {
       "handler": "src.automation.routines.collectTruck.CollectTruckRoutine",
-      "interval": null
+      "interval": 1000
     },
     "secretary": {
       "handler": "src.automation.routines.secretary.SecretaryRoutine",
-      "interval": null
+      "interval": 120
     },
     "mapExchange": {
       "handler": "src.automation.routines.mapExchange.MapExchangeRoutine",
-      "interval": null
+      "interval": 300
     },
     "gifts": {
       "handler": "src.automation.routines.allianceGifts.AllianceGiftsRoutine",
-      "interval": null
+      "interval": 5000
     },
     "collect_resources": {
       "handler": "src.automation.routines.collectResources.CollectResourcesRoutine",
@@ -58,11 +58,7 @@
     },
     "autoJoinRallys": {
       "handler": "src.automation.routines.autoJoinRallys.AutoJoinRallysRoutine",
-      "interval": 1
-    },
-    "autoHeal": {
-      "handler": "src.automation.routines.autoHeal.AutoHealRoutine",
-      "interval": 30
+      "interval": null
     },
     "autoRally": {
       "handler": "src.automation.routines.autoRally.AutoRallyRoutine",
@@ -70,10 +66,14 @@
     },
     "secretTask": {
       "handler": "src.automation.routines.secretTask.SecretTaskRoutine",
-      "interval": null
+      "interval": 120
     },
     "vsWeeklyTopList": {
       "handler": "src.automation.routines.vsWeeklyTopList.VsWeeklyTopListRoutine",
+      "interval": null
+    },
+    "dailyRangList": {
+      "handler": "src.automation.routines.dailyRangList.DailyRangListRoutine",
       "interval": null
     }
   },

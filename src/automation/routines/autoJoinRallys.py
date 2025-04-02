@@ -1,5 +1,5 @@
 from src.automation.routines.routineBase import TimeCheckRoutine
-from src.core.image_processing import find_and_tap_template, find_template
+from src.core.image_processing import find_and_tap_template, find_template, find_all_templates
 import time
 from src.core.adb import press_back, tap_screen
 from src.game.controls import navigate_home,humanized_tap
@@ -18,19 +18,11 @@ class AutoJoinRallysRoutine(TimeCheckRoutine):
             error_msg="Already on map screen",
             success_msg="Opened map screen"
         ):
-            time.sleep(1)
+            time.sleep(0.5)
 
-        if find_and_tap_template(self.device_id, 'collect_rally_icon'):
-            time.sleep(0.2)
-
-            claim_loc = find_template(self.device_id, 'collect_rally_claim')
-            confirm_loc = find_template(self.device_id, 'collect_rally_confirm')
-            if claim_loc:
-                humanized_tap(self.device_id, claim_loc[0], claim_loc[1])
-                time.sleep(0.2)
-            if confirm_loc:
-                humanized_tap(self.device_id, confirm_loc[0], confirm_loc[1])
-                time.sleep(0.2)
+        home_loc = find_template(self.device_id, 'home')
+        if not home_loc:
+            press_back(self.device_id)
 
         if find_and_tap_template(
             self.device_id,
@@ -39,17 +31,19 @@ class AutoJoinRallysRoutine(TimeCheckRoutine):
             success_msg="Starting rally join sequence!"
         ):
             
+            time.sleep(0.1)
             if find_and_tap_template(
                 self.device_id,
                 "rally_available",
                 error_msg="Could not find any rallys",
                 success_msg="Starting joining rally!"
             ):
-                time.sleep(0.2)
-
-                zzz_loc = find_template(self.device_id, 'rally_zzz')
-                if zzz_loc:
-                    tap_screen(self.device_id, zzz_loc[0], zzz_loc[1])
+                time.sleep(0.4)
+                zzz_loc = find_all_templates(self.device_id, 'rally_zzz', [104, 1645, 978, 1710])
+                if len(zzz_loc) > 0:
+                    loc = random.choice(zzz_loc)
+                    tap_screen(self.device_id, loc[0], loc[1])
+                    time.sleep(0.1)
                     
                     if find_and_tap_template(
                         self.device_id,
@@ -57,25 +51,12 @@ class AutoJoinRallysRoutine(TimeCheckRoutine):
                         error_msg="Could not rally, all squads are out",
                         success_msg="Joined rally!"
                     ):
-                        time.sleep(0.2)
-                    
-                        find_and_tap_template(
-                            self.device_id,
-                            "rally_back_home",
-                            error_msg="Already on home screen",
-                            success_msg="Navigated back to home"
-                        )
-                        time.sleep(round(random.uniform(0.1, 1), 2))
                         return True
-                    else:
-                        navigate_home(self.device_id)
                 else:
                     app_logger.info('Got no team at home, not joining rally')
+                    time.sleep(0.2)
                     navigate_home(self.device_id)
-            else:
-                navigate_home(self.device_id)
-
-            time.sleep(round(random.uniform(0.1, 1), 2))
-            
+            else: 
+                find_and_tap_template(self.device_id, 'ranglist_back')
 
         return True 
